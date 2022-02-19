@@ -4,6 +4,7 @@ import Head from 'next/head'
 import NavBar from '../components/NavBar'
 import { auth } from '../firebase'
 import { useEffect,useState } from 'react'
+import Footer from '../components/Footer'
 
 function MyApp({ Component, pageProps }) {
 const  [user,setUser] = useState(null)
@@ -21,6 +22,7 @@ const  [user,setUser] = useState(null)
   </Head>
   <NavBar user ={user}/>
    <Component {...pageProps} user ={user}/>
+   <Footer/>
   </>
   )
  
