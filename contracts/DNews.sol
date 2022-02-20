@@ -12,6 +12,7 @@ contract DNews is ERC20, ERC20Burnable, Ownable {
 
     mapping(string => address) private ipfsDataUrlToAuthor;
     mapping(address => int256) private authorBlogCount;
+    mapping(string => int256) private votes;
 
     int256 private count = 0;
 
@@ -27,6 +28,7 @@ contract DNews is ERC20, ERC20Burnable, Ownable {
         ipfsDataUrls.push(_ipfsDataUrl);
         ipfsDataUrlToAuthor[_ipfsDataUrl] = msg.sender;
         authorBlogCount[msg.sender]++;
+        votes[_ipfsDataUrl] = 0;
     }
 
     function getAuthorBlogCountByAddr(address author)
@@ -43,5 +45,17 @@ contract DNews is ERC20, ERC20Burnable, Ownable {
 
     function getAllBlogs() public view returns (string[] memory) {
         return ipfsDataUrls;
+    }
+
+    function getBlogVotes(string memory _ipfsDataUrl)
+        public
+        view
+        returns (int256)
+    {
+        return votes[_ipfsDataUrl];
+    }
+
+    function voteForBlog(string memory _ipfsDataUrl) public {
+        votes[_ipfsDataUrl]++;
     }
 }

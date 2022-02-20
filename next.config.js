@@ -2,7 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["ipfs.infura.io"],
+    loader: "imgix",
+    path: "",
+    domains: ["cdn.iconscout.com", "ipfs.infura.io"],
   },
 };
 

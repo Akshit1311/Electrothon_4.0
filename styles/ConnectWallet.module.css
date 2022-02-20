@@ -1,0 +1,19 @@
+.button {
+  border: 1px solid orange;
+  color: orange;
+  height: fit-content;
+  padding: 0 1rem;
+  border-radius: 2rem;
+  margin-left: 1rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.button:hover {
+  opacity: 0.75;
+}
+
+.text {
+  margin-left: 0.5rem;
+}

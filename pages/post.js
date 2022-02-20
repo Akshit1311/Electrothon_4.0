@@ -3,8 +3,15 @@ import { v4 as uuidv4 } from "uuid";
 import { storage, db, serverTimestamp } from "../firebase";
 import Head from "next/head";
 import getIpfsUrl from "../utils/getIpfsUrl";
+import { useRouter } from "next/router";
+
+import DNews from "../artifacts/contracts/DNews.sol/DNews.json";
+
+import { ethers } from "ethers";
 
 export default function Post({ user }) {
+  const router = useRouter();
+
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [image, setImage] = useState(null);
@@ -15,6 +22,20 @@ export default function Post({ user }) {
     body: "",
     imgUrl: "",
   });
+
+  const [contract, setContract] = useState(null);
+
+  useEffect(() => {
+    const contractAddr = process.env.NEXT_PUBLIC_CONRACT_ADDR;
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+    const signer = provider.getSigner();
+
+    const _contract = new ethers.Contract(contractAddr, DNews.abi, signer);
+
+    setContract(_contract);
+  }, []);
 
   useEffect(() => {
     if (url) {
@@ -91,7 +112,11 @@ export default function Post({ user }) {
 
     const dataUrl = await resolveIpfsUrl(jsonBlogData);
 
-    console.log({ dataUrl });
+    const createBlog = await contract.createBlog(dataUrl);
+
+    console.log({ dataUrl, createBlog });
+
+    if (createBlog) router.push("/");
   };
 
   const onChange = (e) => {

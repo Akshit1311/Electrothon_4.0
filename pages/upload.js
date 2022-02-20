@@ -46,7 +46,7 @@ const Upload = () => {
 
       {urlArr.length !== 0 ? (
         urlArr.map((el, i) => (
-          <Image key={i} src={el} alt="nfts" height={300} width={300} />
+          <img key={i} src={el} alt="nfts" height={300} width={300} />
         ))
       ) : (
         <h3>Upload data</h3>
