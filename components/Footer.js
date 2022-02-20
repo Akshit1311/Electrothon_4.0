@@ -20,8 +20,8 @@ function Footer() {
               </div>
             </div>
           </div>
-          <div class="footer-copyright">
-            <div class="container center">
+          <div className="footer-copyright">
+            <div className="container center">
             © 2022 Copyright Team : Non Fungible Hackers!
            
             </div>
