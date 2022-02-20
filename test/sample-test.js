@@ -1,19 +1,21 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
-describe("Greeter", function () {
-  it("Should return the new greeting once it's changed", async function () {
-    const Greeter = await ethers.getContractFactory("Greeter");
-    const greeter = await Greeter.deploy("Hello, world!");
-    await greeter.deployed();
+describe("DNews", function () {
+  it("Should return the blog ipfs url", async function () {
+    const DNews = await ethers.getContractFactory("DNews");
+    const dNews = await DNews.deploy();
+    await dNews.deployed();
 
-    expect(await greeter.greet()).to.equal("Hello, world!");
-
-    const setGreetingTx = await greeter.setGreeting("Hola, mundo!");
+    const createBlog1 = await dNews.createBlog("ipfs://1");
+    const createBlog2 = await dNews.createBlog("ipfs://2");
 
     // wait until the transaction is mined
-    await setGreetingTx.wait();
+    await createBlog1.wait();
+    await createBlog2.wait();
 
-    expect(await greeter.greet()).to.equal("Hola, mundo!");
+    const blogs = await dNews.getAllBlogs();
+    const authBlogCount = await dNews.getAuthorBlogCount();
+    console.log({ blogs, authBlogCount });
   });
 });
