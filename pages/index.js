@@ -19,25 +19,6 @@ import { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import axios from "axios";
 
-const posts = [
-  {
-    id: "x1",
-    imgUrl:
-      "https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png",
-    creator: "0xkasdkd",
-    title: "Test Title 1",
-    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  },
-];
-
-export const getStaticProps = async () => {
-  return {
-    props: {
-      news: posts,
-    },
-  };
-};
-
 export default function Home({ news }) {
   const [contract, setContract] = useState(null);
   const [blogToVote, setBlogToVote] = useState([]);

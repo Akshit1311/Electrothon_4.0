@@ -7,13 +7,17 @@ const ConnectWallet = () => {
   const [accountAddr, setAccountAddr] = useState("");
 
   const connectWallet = async () => {
-    if (!accountAddr) {
-      const [account] = await window.ethereum.request({
-        method: "eth_requestAccounts",
-      });
+    try {
+      if (!accountAddr) {
+        const [account] = await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
 
-      setAccountAddr(account);
-    } else setAccountAddr("");
+        setAccountAddr(account);
+      } else setAccountAddr("");
+    } catch (error) {
+      console.log({ error });
+    }
   };
 
   return (
